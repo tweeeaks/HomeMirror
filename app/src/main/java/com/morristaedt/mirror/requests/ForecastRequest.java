@@ -12,6 +12,6 @@ public interface ForecastRequest {
     public static final String UNITS_SI = "si";
     public static final String UNITS_US = "us";
 
-    @GET("/forecast/{apikey}/{lat},{lon}")
-    ForecastResponse getHourlyForecast(@Path("apikey") String apiKey, @Path("lat") String lat, @Path("lon") String lon, @Query("exclude") String exclude, @Query("units") String units, @Query("lang") String language);
+    @GET("/forecast/{apikey}/{lat},{lon},{time}")
+    ForecastResponse getHourlyForecast(@Path("apikey") String apiKey, @Path("lat") String lat, @Path("lon") String lon, @Path("time") String time, @Query("exclude") String exclude, @Query("units") String units, @Query("lang") String language);
 }

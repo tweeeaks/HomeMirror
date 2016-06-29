@@ -42,6 +42,7 @@ public class MirrorActivity extends ActionBarActivity {
     private TextView mBirthdayText;
     private TextView mDayText;
     private TextView mWeatherSummary;
+    private TextView mWeatherDailySummary;
     private TextView mHelloText;
     private TextView mBikeTodayText;
     private TextView mStockText;
@@ -87,7 +88,13 @@ public class MirrorActivity extends ActionBarActivity {
                 mWeatherSummary.setText(weatherToday);
             }
         }
-
+        @Override
+        public void onWeatherDailySummary(String weatherDailySummary) {
+            if (!TextUtils.isEmpty(weatherDailySummary)) {
+                mWeatherDailySummary.setVisibility(View.VISIBLE);
+                mWeatherDailySummary.setText(weatherDailySummary);
+            }
+        }
         @Override
         public void onShouldBike(boolean showToday, boolean shouldBike) {
             if (mConfigSettings.showBikingHint()) {
@@ -181,6 +188,7 @@ public class MirrorActivity extends ActionBarActivity {
         mBirthdayText = (TextView) findViewById(R.id.birthday_text);
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
+        mWeatherDailySummary = (TextView) findViewById(R.id.weather_daily_summary);
         mHelloText = (TextView) findViewById(R.id.hello_text);
         mWaterPlants = findViewById(R.id.water_plants);
         mGroceryList = findViewById(R.id.grocery_list);

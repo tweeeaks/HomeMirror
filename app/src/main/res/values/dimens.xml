@@ -10,4 +10,6 @@
     <dimen name="mirror_birthday_text_size">48sp</dimen>
     <dimen name="configuration_text_size">20sp</dimen>
     <dimen name="configuration_description_size">14sp</dimen>
+    <dimen name="mirror_weather_summary_text_size">20sp</dimen>
+
 </resources>

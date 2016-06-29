@@ -31,7 +31,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
-        tools:text="Partly Cloudy" />
+        tools:text="76 Partly Cloudy" />
+
+    <TextView
+        android:id="@+id/weather_daily_summary"
+        style="@style/MirrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        tools:text="Partly cloudy in the afternoon."
+        android:textSize="@dimen/mirror_weather_summary_text_size"/>
 
     <TextView
         android:id="@+id/calendar_title"

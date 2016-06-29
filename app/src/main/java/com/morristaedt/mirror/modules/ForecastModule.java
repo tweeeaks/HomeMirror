@@ -25,7 +25,7 @@ public class ForecastModule {
 
     public interface ForecastListener {
         void onWeatherToday(String weatherToday);
-
+        void onWeatherDailySummary(String weatherDailySummary);
         void onShouldBike(boolean showToday, boolean shouldBike);
     }
 
@@ -46,10 +46,12 @@ public class ForecastModule {
                         .build();
 
                 ForecastRequest service = restAdapter.create(ForecastRequest.class);
-                String excludes = "minutely,daily,flags";
+                String excludes = "minutely,flags";
+                Long unixTime = System.currentTimeMillis() / 1000L;
+                String time = unixTime.toString();
 
                 try {
-                    return service.getHourlyForecast(apiKey, lat, lon, excludes, units, Locale.getDefault().getLanguage());
+                    return service.getHourlyForecast(apiKey, lat, lon, time, excludes, units, Locale.getDefault().getLanguage());
                 } catch (RetrofitError error) {
                     Log.w("ForecastModule", "Forecast error: " + error.getMessage());
                     return null;
@@ -61,6 +63,10 @@ public class ForecastModule {
                 if (forecastResponse != null) {
                     if (forecastResponse.currently != null) {
                         listener.onWeatherToday(forecastResponse.currently.getDisplayTemperature() + " " + forecastResponse.currently.summary);
+                    }
+
+                    if (forecastResponse.daily != null && forecastResponse.daily.data != null) {
+                        listener.onWeatherDailySummary(forecastResponse.daily.getFirstDailySummary());
                     }
 
                     if (forecastResponse.hourly != null && forecastResponse.hourly.data != null && (ConfigurationSettings.isDemoMode() || WeekUtil.isWeekdayBeforeFive())) {
