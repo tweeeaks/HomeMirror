@@ -11,5 +11,7 @@
     <dimen name="configuration_text_size">20sp</dimen>
     <dimen name="configuration_description_size">14sp</dimen>
     <dimen name="mirror_weather_summary_text_size">20sp</dimen>
+    <dimen name="mirror_bitstamp_last_text_size">50sp</dimen>
+    <dimen name="mirror_bitstamp_details_text_size">25sp</dimen>
 
 </resources>

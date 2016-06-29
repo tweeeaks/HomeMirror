@@ -43,6 +43,24 @@
         android:textSize="@dimen/mirror_weather_summary_text_size"/>
 
     <TextView
+        android:id="@+id/btc_bitstamp_last"
+        style="@style/MirrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:includeFontPadding="false"
+        tools:text="BTC Price"
+        android:textSize="@dimen/mirror_bitstamp_last_text_size"/>
+    <TextView
+        android:id="@+id/btc_bitstamp_details"
+        style="@style/MirrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        tools:text="BTC Price"
+        android:textSize="@dimen/mirror_bitstamp_details_text_size"/>
+
+    <TextView
         android:id="@+id/calendar_title"
         style="@style/MirrorText"
         android:visibility="gone"

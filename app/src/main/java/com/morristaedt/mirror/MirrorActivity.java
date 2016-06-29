@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.BirthdayModule;
+import com.morristaedt.mirror.modules.BitcoinModule;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.ChoresModule;
 import com.morristaedt.mirror.modules.CountdownModule;
@@ -43,6 +44,8 @@ public class MirrorActivity extends ActionBarActivity {
     private TextView mDayText;
     private TextView mWeatherSummary;
     private TextView mWeatherDailySummary;
+    private TextView mBtcBitstampLast;
+    private TextView mBtcBitstampDetails;
     private TextView mHelloText;
     private TextView mBikeTodayText;
     private TextView mStockText;
@@ -104,6 +107,25 @@ public class MirrorActivity extends ActionBarActivity {
                 mBikeTodayText.setVisibility(View.GONE);
             }
         }
+    };
+
+    private BitcoinModule.BitcoinListener mBitcoinListener = new BitcoinModule.BitcoinListener() {
+        @Override
+        public void getBitstampLast(String last) {
+            if (!TextUtils.isEmpty(last)) {
+                mBtcBitstampLast.setVisibility(View.VISIBLE);
+                mBtcBitstampLast.setText(last);
+            }
+        }
+
+        @Override
+        public void getBitstampDetails(String details) {
+            if (!TextUtils.isEmpty(details)) {
+                mBtcBitstampDetails.setVisibility(View.VISIBLE);
+                mBtcBitstampDetails.setText(details);
+            }
+        }
+
     };
 
     private NewsModule.NewsListener mNewsListener = new NewsModule.NewsListener() {
@@ -189,6 +211,8 @@ public class MirrorActivity extends ActionBarActivity {
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
         mWeatherDailySummary = (TextView) findViewById(R.id.weather_daily_summary);
+        mBtcBitstampLast = (TextView) findViewById(R.id.btc_bitstamp_last);
+        mBtcBitstampDetails = (TextView) findViewById(R.id.btc_bitstamp_details);
         mHelloText = (TextView) findViewById(R.id.hello_text);
         mWaterPlants = findViewById(R.id.water_plants);
         mGroceryList = findViewById(R.id.grocery_list);
@@ -269,6 +293,9 @@ public class MirrorActivity extends ActionBarActivity {
         } else if (openWeatherApiKeyRes != 0) {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         }
+
+        // TODO: Add to settings & check if enabled
+        BitcoinModule.getBitcoinIOBiminutelyTicker(mBitcoinListener);
 
         if (mConfigSettings.showNewsHeadline()) {
             NewsModule.getNewsHeadline(mNewsListener);
